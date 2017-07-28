@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/jquery.ztree.exedit.js"></script>
+    <script src="../js/jquery.ztree.excheck.js"></script>
+    <script src="../js/jquery.ztree.core.js"></script>
+    <!--<script src="js/ztree.js"></script>-->
+    <link rel="stylesheet" href="../css/demo.css">
+    <link rel="stylesheet" href="../css/zTreeStyle.css">
+<script type="text/javascript" language="javascript" >
+
+    var setting = {
+        callback: {
+            beforeClick: beforeClick
+        },
+        data : {
+            key : {
+                name : "zname",
+                /* children : "Ztree" */
+            },
+            simpleData : {
+                enable : true,
+                idKey : "zid",
+                pIdKey : "pid",
+                rootPId : 0
+            }
+        }
+
+    };
+    var zTree;
+    var treeNodes;
+
+    $(function() {
+        $.ajax({
+            async : false,
+            cache : false,
+            type : "post",
+            dataType : "json",
+            url : "../ztree",//请求的action路径
+            error : function() {//请求失败处理函数
+                alert('fail');
+            },
+            success : function(data) { //请求成功后处理函数。
+                /* alert(data); */
+                treeNodes = data; //把后台封装好的简单Json格式赋给treeNodes
+            }
+        });
+        $.fn.zTree.init($("#treeDemo"), setting, treeNodes);
+
+    });
+    function beforeClick(treeId, treeNode) {
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+        if (treeNode.isParent) {
+            zTree.expandNode(treeNode);
+            return false;
+        } else {
+            var name = treeNode.name;
+            var url = treeNode.url;
+            /* alert(url); */
+            return true;
+        }
+
+    }
+
+
+</script>
+<style>
+
+</style>
+
+</head>
+<body>
+<ul id="treeDemo" class="ztree" style="background-color: #5cb85c;border: none;height: auto;overflow: auto;list-style:none "></ul>
+
+</body>
+</html>

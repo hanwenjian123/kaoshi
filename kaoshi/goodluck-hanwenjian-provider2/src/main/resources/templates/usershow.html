@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/showuser.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+
+</head>
+<body>
+<!--<button type="button" class="btn btn-default  btn-lg" data-toggle="modal" data-target="#addModal" style="float: right;margin-right: 50px;margin-top: 30px">添加 </button>-->
+<form action="namefind" method="post">
+    <input type="text" name="uname">
+    <input type="submit" value="查询">
+</form>
+<div class="bs-example" data-example-id="hoverable-table">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>姓名</th>
+            <th>密码</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>头像</th>
+            <th>爱好</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="u: ${find}">
+            <td th:text="${u.uid}"></td>
+            <td th:text="${u.uname}"></td>
+            <td th:text="${u.upwd}"></td>
+            <td th:text="${u.age}"></td>
+            <td th:text="${u.sex}"></td>
+            <td th:text="${u.tou}"></td>
+            <td th:text="${u.hobby}"></td>
+            <td>
+                <button name="but" class="btn btn-default  btn-sm" data-toggle="modal" data-target="#upModal" th:id="${u.uid}">修改</button>
+                <a th:href="@{deleteuser(uid=${u.uid})}" class="btn btn-default  btn-sm">删除</a>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- addModal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加信息</h4>
+            </div>
+            <div class="modal-body">
+                <form action="adduser" method="post">
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input type="text" class="form-control" id="name" name="uname" placeholder="请输入名字">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">密码</label>
+                        <input type="password" class="form-control" id="pwd" name="upwd" placeholder="请输入密码">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">年龄</label>
+                        <input type="text" class="form-control" id="age" name="age" placeholder="请输入名字">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">性别</label>
+                        <input type="text" class="form-control" id="sex" name="sex" placeholder="请输入名字">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">头像</label>
+                        <input type="text" class="form-control" id="tou" name="tou" placeholder="请输入名字">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">爱好</label>
+                        <input type="text" class="form-control" id="hobby" name="hobby" placeholder="请输入名字">
+                    </div>
+                    <!-- <div class="form-group">
+                         <label for="exampleInputFile">File input</label>
+                         <input type="file" id="exampleInputFile">
+                         <p class="help-block">Example block-level help text here.</p>
+                     </div>
+                     <div class="checkbox">
+                         <label>
+                             <input type="checkbox"> Check me out
+                         </label>
+                     </div>-->
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">添加</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- upModal -->
+<div class="modal fade" id="upModal" tabindex="-1" role="dialog" aria-labelledby="upModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="upModalLabel">修改信息</h4>
+            </div>
+            <div class="modal-body">
+                <form action="toupdateuser" method="post">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="uid" name="uid" >
+                    </div>
+                    <div class="form-group">
+                        <label for="name1">姓名</label>
+                        <input type="text" class="form-control" id="name1" name="uname" placeholder="请输入名字">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd1">密码</label>
+                        <input type="password" class="form-control" id="pwd1" name="upwd" placeholder="请输入密码">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">年龄</label>
+                        <input type="text" class="form-control" id="age1" name="age" placeholder="请输入名字">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">性别</label>
+                        <input type="text" class="form-control" id="sex1" name="sex" placeholder="请输入名字">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">头像</label>
+                        <input type="text" class="form-control" id="tou1" name="tou" placeholder="请输入名字">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">爱好</label>
+                        <input type="text" class="form-control" id="hobby1" name="hobby" placeholder="请输入名字">
+                    </div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">修改</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- role -->
+<div class="modal fade" id="roleModal" tabindex="-1" role="dialog" aria-labelledby="roleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="roleModalLabel">修改角色</h4>
+            </div>
+            <div class="modal-body" >
+                <form action="/role/dd" method="post" >
+                    <div id="roleSel" class="form-group" >
+                    </div>
+                    <input type="hidden" id="urid" name="urid" value="33333">
+                    <input type="submit" value="提交"  class="btn btn-default">
+                </form>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

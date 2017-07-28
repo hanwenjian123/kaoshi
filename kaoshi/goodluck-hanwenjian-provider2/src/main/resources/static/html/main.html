@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/jquery-2.1.4.js"></script>
+<style>
+    /*套在Select外层，用于隐藏Select框*/
+    .DivSelect
+    {
+        float:left;
+        position: relative;
+        background-color: transparent;
+        height: 200px;
+        overflow: hidden; /*隐藏了小三角，宽度为比select宽度少20px*/
+        border-width:0px;
+        border-top-style: none;
+        border-right-style: none;
+        border-left-style: none;
+        border-bottom-style: none;
+    }
+    /*设置Select样式*/
+    .SelectList
+    {
+
+        color: red;
+        font-size:100px;
+        position: relative;
+        background-color: #f9f2f4;
+        TOP:   -2px;
+        left:-2px;
+        border-width: 0px;
+        border-top-style: none;
+        border-right-style: none;
+        border-left-style: none;
+        border-bottom-style: none;
+        display:block;
+        height: 200px;
+        overflow:hidden;
+    }
+    select{
+        -moz-appearance: none;
+        -webkit-appearance:none;
+        appearance:none;
+    }
+</style>
+</head>
+<body style="background-color: #f9f2f4 ">
+<center>
+<h1>吊打膏咏赔</h1></center>
+<div class="DivSelect">
+    <select class="SelectList">
+        <option>吊打膏咏赔</option>
+        <option>殴打膏咏赔</option>
+        <option>往死里打膏咏赔</option>
+        <option>打不死节接着打Gao Yongpei</option>
+    </select>
+</div>
+
+
+</body>
+</html>
